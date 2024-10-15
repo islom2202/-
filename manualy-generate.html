@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    p, input, select, button{
+      font-size: clamp(16px, 1vw, 1.4rem)
+    }
+    body{
+      margin: clamp(5px, 1vw, 2rem)
+    }
+  </style>
+</head>
+<body >
+<form style="display: flex; flex-wrap: wrap;">
+  <input type="number" max="9" placeholder="Неправильный номер" class="incorrect-input">
+  <input type="number" placeholder="Правильный номер" class="correct-input">
+  <input type="number" placeholder="Сумма" class="amount-input">
+  <input type="date" placeholder="dd/mm/yy" class="date-input">
+  <select id="service-select">
+    <option value="DC Wallet">DC Wallet</option>
+    <option value="Zet Mobile">Zet Mobile</option>
+    <option value="Somon Tj">Somon Tj</option>
+    <option value="Vasl Wallet">Vasl Wallet</option>
+  </select>
+</form>
+<p class="result">
+Добрый день.<br> 
+Можете пожалуйста скорректировать данный платёж.<br>  
+Неправильный номер: <mark class="incorrect-result"></mark><br> 
+Правильный номер: <mark class="correct-result"></mark><br> 
+Сумма: <mark class="amount-result"></mark> сомонӣ<br> 
+Дата: <mark class="date-result"></mark><br> 
+Сервис: <mark class="service-result">DC Wallet</mark> <br> 
+</p>
+<button class="copy-btn">Copy</button>
+<script>
+  // input tags
+  const incorrectInput = document.querySelector('.incorrect-input');
+  const correctInput = document.querySelector('.correct-input');
+  const amountInput = document.querySelector('.amount-input');
+  const dateInput = document.querySelector('.date-input');
+  const serviceSelect = document.querySelector('#service-select');
+
+  // result tags
+  const incorrectResult = document.querySelector('.incorrect-result');
+  const correctResult = document.querySelector('.correct-result');
+  const amountResult = document.querySelector('.amount-result');
+  const dateResult = document.querySelector('.date-result');
+  const serviceResult = document.querySelector('.service-result');
+
+  // result functions
+  incorrectInput.oninput = (e) => incorrectResult.innerHTML = e.target.value
+  correctInput.oninput = (e) => correctResult.innerHTML = e.target.value
+  amountInput.oninput = (e) => amountResult.innerHTML = e.target.value
+  dateInput.oninput = (e) => dateResult.innerHTML = (e.target.value).split('-').reverse().join('.');
+  serviceSelect.onchange = (e) => serviceResult.innerHTML = e.target.value
+
+  // copy function
+   const result = document.querySelector('.result');
+   const copyBtn = document.querySelector('.copy-btn')
+   copyBtn.onclick = () => {
+    navigator.clipboard.writeText(result.textContent)
+    inputs = [correctInput, incorrectInput, amountInput]
+    inputs.forEach((e)=> e.value = '')
+    copyBtn.innerHTML = 'Coppied'
+    setTimeout(() => {
+      copyBtn.innerHTML = 'Coppy'
+    }, 500);
+   } 
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Генератсияи Дархост</title>
+</head>
+<body>
+  <!--Sample-->
+  <h3>Намуна:</h3>
+  <p class="example">
+    Лутфан дархостро ба монанди мисоли зерин пур кунед:<br>
+    Рақамҳои дуруст: 989155768<br>
+    Рақамҳои нодуруст: 989155764<br>
+    Миқдори маблағ: 70<br>
+    Санаи амалиёт: 13.10.2024
+  </p><br>
+  <!--Client's request-->
+  <input class="request" placeholder="маълумоти мизоҷ"/>
+  <!--Result-->
+  <p class="result">
+  </p>
+  <button class="copy-btn">copy</button>
+  <script>
+    // selectors
+    const request = document.querySelector('.request');
+    const result = document.querySelector('.result');
+    const copyBtn = document.querySelector('.copy-btn')
+    let correctNum, incorrectNum, sum, date;
+
+    // define request's inputs
+    function defineInputs(request){
+      correctNum = request.match(/\d+/g)[0]
+      incorrectNum = request.match(/\d+/g)[1]
+      sum = request.match(/\d+/g)[2]
+      date = request.match(/\d{2}.\d{2}.\d{4}/g)[0]
+    }
+
+    // generate HTML
+    function generateHTML(correct, incorrect, sum, date){
+      result.innerHTML = 
+`
+Добрый день.<br> 
+Можете пожалуйста скорректировать данный платёж.<br> 
+Неправильный номер: ${incorrect}<br>
+Правильный номер: ${correct}<br>
+Сумма: ${sum} сомонӣ<br>
+Дата: ${date}<br>
+Сервис: DC Wallet
+`
+    }
+    request.oninput = () => {
+      if(request.value){
+        defineInputs(request.value)
+        generateHTML(correctNum, incorrectNum, sum, date)
+      } 
+    } 
+
+  // copy function
+   copyBtn.onclick = () => {
+    navigator.clipboard.writeText(result.textContent)
+    request.value = ''
+    copyBtn.innerHTML = 'Coppied'
+    setTimeout(() => {
+      copyBtn.innerHTML = 'Coppy'
+    }, 500);
+   } 
+  </script>
+</body>
+</html>
