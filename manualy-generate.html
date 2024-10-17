@@ -3,18 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    p, input, select, button{
-      font-size: clamp(16px, 1vw, 1.4rem)
-    }
-    body{
-      margin: clamp(5px, 1vw, 2rem)
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <title>Генератсияи дастӣ</title>
 </head>
 <body >
-<form style="display: flex; flex-wrap: wrap;">
+<form>
   <input type="number" max="9" placeholder="Неправильный номер" class="incorrect-input">
   <input type="number" placeholder="Правильный номер" class="correct-input">
   <input type="number" placeholder="Сумма" class="amount-input">
@@ -66,9 +59,11 @@
     inputs = [correctInput, incorrectInput, amountInput]
     inputs.forEach((e)=> e.value = '')
     copyBtn.innerHTML = 'Coppied'
+    copyBtn.style.backgroundColor = 'green'
     setTimeout(() => {
       copyBtn.innerHTML = 'Coppy'
-    }, 500);
+      copyBtn.style.backgroundColor = 'red'
+    }, 800);
    } 
 </script>
 </body>

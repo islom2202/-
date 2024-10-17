@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Генератсияи Дархост</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Генератсияи автоматӣ</title>
 </head>
 <body>
   <!--Sample-->
@@ -61,9 +62,11 @@
     navigator.clipboard.writeText(result.textContent)
     request.value = ''
     copyBtn.innerHTML = 'Coppied'
+    copyBtn.style.backgroundColor = 'green'
     setTimeout(() => {
       copyBtn.innerHTML = 'Coppy'
-    }, 500);
+      copyBtn.style.backgroundColor = 'red'
+    }, 800);
    } 
   </script>
 </body>
